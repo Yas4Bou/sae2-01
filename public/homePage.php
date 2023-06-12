@@ -21,7 +21,7 @@ $requete->execute();
 
 while (($ligne = $requete->fetch()) !== false) {
     $l = $homePage->escapeString($ligne['title']);
-    $homePage->appendContent("<a href='http://localhost:8000/moviePage.php?nombre=$ligne[id]'>$l<br>");
+    $homePage->appendContent("<a href='http://localhost:8000/moviePage.php?nombre=$ligne[id]'>$l</a><br>");
 }
 
 $date = $homePage ->getLastModification();
