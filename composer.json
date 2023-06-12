@@ -1,5 +1,44 @@
 {
+    "name": "mart0421/sae2-01",
+    "description": "Développement d'une application Web de consultation et modification de films",
+    "type": "project",
+    "license": "Copyleft",
+
+    "scripts": {
+        "start:linux" : "bin/run-server.sh",
+        "test:cs" :  "php vendor/bin/php-cs-fixer fix --dry-run --diff",
+        "fix:cs" : "php vendor/bin/php-cs-fixer fix",
+        "start:windows" : "bin/run-server.bat",
+        "start" : "start:windows"
+    },
+    "config": {
+        "process-timeout": 0
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "mart0421",
+            "email": "line.martinet@etudiant.univ-reims.fr"
+        }
+    ],
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.17"
+        "friendsofphp/php-cs-fixer": "^3.16",
+        "codeception/codeception": "^4.1",
+        "codeception/module-phpbrowser": "^1",
+        "codeception/module-asserts": "^1",
+        "codeception/module-db": "^1"
+    },
+    "require": {
+        "ext-pdo": "*"
     }
 }
+
