@@ -1,8 +1,12 @@
 {
-    "name": "mart0421/sae2-01",
-    "description": "Développement d'une application Web de consultation et modification de films",
+    "name": "line/sae2-01",
+    "description": "Developpement d'un application Web de consultation et modification de films",
     "type": "project",
     "license": "Copyleft",
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }, 
 
     "scripts": {
         "start:linux" : "bin/run-server.sh",
@@ -11,34 +15,20 @@
         "start:windows" : "bin/run-server.bat",
         "start" : "start:windows"
     },
+
     "config": {
         "process-timeout": 0
     },
-    "autoload": {
-        "psr-4": {
-            "": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tests": "tests/"
-        }
-    },
     "authors": [
         {
-            "name": "mart0421",
+            "name": "line martinet",
             "email": "line.martinet@etudiant.univ-reims.fr"
         }
     ],
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.16",
-        "codeception/codeception": "^4.1",
-        "codeception/module-phpbrowser": "^1",
-        "codeception/module-asserts": "^1",
-        "codeception/module-db": "^1"
-    },
     "require": {
         "ext-pdo": "*"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.17"
     }
 }
-
