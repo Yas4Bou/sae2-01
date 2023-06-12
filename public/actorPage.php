@@ -27,10 +27,26 @@ if(isset($_GET["nombre"])){
     }
 
 
+    $requetes2 = MyPDO::getInstance()->prepare(
+        <<<'SQL'
+        SELECT m.id , title , role , releaseDate
+        FROM people p , cast c , movie m 
+        WHERE m.id = c.movieId 
+          AND c.peopleId = p.id 
+            AND m.id = ?
+        ORDER BY role
+        SQL);
+
+    $requetes2->execute([$Id]);
+
+    while (($ligne = $requetes2->fetch()) !== false) {
+        $title = $actorPage->escapeString($ligne['title']);
+        $role = $actorPage->escapeString($ligne['role']);
+        $actorPage->appendContent("<a href='http://localhost:8000/actorPage.php?nombre=$ligne[id]'> Titre du film : $title <br> Role : $role </a></p>\n");
+    }
 
     $date = $actorPage ->getLastModification();
     $actorPage ->appendContent("<footer>$date</footer>");
-
 }
 else{
     header("Location : http://localhost:8000/homePage.php", true, 302);
