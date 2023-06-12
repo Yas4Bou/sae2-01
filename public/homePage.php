@@ -8,7 +8,7 @@ use Html\WebPage;
 
 $homePage = new WebPage();
 $homePage ->setTitle("Films");
-$homePage ->appendContent("<h1>Films</h1>");
+$homePage ->appendContent("<header><h1>Films</h1></header>");
 $requete = MyPDO::getInstance()->prepare(
     <<<'SQL'
     SELECT title
@@ -23,5 +23,7 @@ while (($ligne = $requete->fetch()) !== false) {
     $l = $homePage->escapeString($ligne['title']);
     $homePage->appendContent("$l\n<br>");
 }
+$date = $homePage ->getLastModification();
+$homePage ->appendContent("<footer>$date</footer>");
 
 echo $homePage->TOHTML();
