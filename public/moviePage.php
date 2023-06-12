@@ -28,7 +28,7 @@ if(isset($_GET["nombre"])){
     }
     $requetes2 = MyPDO::getInstance()->prepare(
         <<<'SQL'
-        SELECT name , role 
+        SELECT p.id , name , role 
         FROM people p , cast c , movie m 
         WHERE m.id = c.movieId 
           AND c.peopleId = p.id 
@@ -41,7 +41,7 @@ if(isset($_GET["nombre"])){
     while (($ligne = $requetes2->fetch()) !== false) {
         $name = $moviePage->escapeString($ligne['name']);
         $role = $moviePage->escapeString($ligne['role']);
-        $moviePage->appendContent("<p>Role : $role <br> vrai nom : $name </p>\n");
+        $moviePage->appendContent("<a href='http://localhost:8000/actorPage.php?nombre=$ligne[id]'>Role : $role <br> vrai nom : $name </a></p>\n");
     }
 
 
