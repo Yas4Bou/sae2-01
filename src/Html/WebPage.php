@@ -144,6 +144,7 @@ class WebPage
      * @return string
      */
     public static function getLastModification(): string
+    
     {
         return date( "l jS \of F Y h:i:s A", getlastmod());
     }
