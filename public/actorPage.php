@@ -33,7 +33,7 @@ if(isset($_GET["nombre"])){
         FROM people p , cast c , movie m 
         WHERE m.id = c.movieId 
           AND c.peopleId = p.id 
-            AND m.id = ?
+            AND p.id = ?
         ORDER BY role
         SQL);
 
@@ -42,7 +42,7 @@ if(isset($_GET["nombre"])){
     while (($ligne = $requetes2->fetch()) !== false) {
         $title = $actorPage->escapeString($ligne['title']);
         $role = $actorPage->escapeString($ligne['role']);
-        $actorPage->appendContent("<a href='http://localhost:8000/actorPage.php?nombre=$ligne[id]'> Titre du film : $title <br> Role : $role </a></p>\n");
+        $actorPage->appendContent("<a href='http://localhost:8000/moviePage.php?nombre=$ligne[id]'> Titre du film : $title <br> Role : $role </a></p>\n");
     }
 
     $date = $actorPage ->getLastModification();
