@@ -26,7 +26,23 @@ if(isset($_GET["nombre"])){
         $moviePage -> setTitle(" Films - $title");
         $moviePage->appendContent("<hearder><h1>Films - $title</h1></hearder> <p> $title     date de sortie : $ligne[releaseDate] <br> Titre d'origine : $originTitle <br> Slogan : $tagline <br> Resumer :  $overview </p>");
     }
+    $requetes2 = MyPDO::getInstance()->prepare(
+        <<<'SQL'
+        SELECT name , role 
+        FROM people p , cast c , movie m 
+        WHERE m.id = c.movieId 
+          AND c.peopleId = p.id 
+            AND m.id = ?
+        ORDER BY role
+        SQL);
 
+    $requetes2->execute([$Id]);
+
+    while (($ligne = $requetes2->fetch()) !== false) {
+        $name = $moviePage->escapeString($ligne['name']);
+        $role = $moviePage->escapeString($ligne['role']);
+        $moviePage->appendContent("<p>Role : $role <br> vrai nom : $name </p>\n");
+    }
 
 
     $date = $moviePage ->getLastModification();
