@@ -6,8 +6,6 @@ use Html\WebPage;
 
 $moviePage = new WebPage();
 
-$moviePage ->appendContent("<header><h1>Films</h1></header>");
-
 if(isset($_GET["nombre"])){
     $Id = $_GET['nombre'];
 
@@ -26,7 +24,7 @@ if(isset($_GET["nombre"])){
         $tagline = $moviePage->escapeString($ligne['tagline']);
         $overview = $moviePage->escapeString($ligne['overview']);
         $moviePage -> setTitle(" Films - $title");
-        $moviePage->appendContent("<h1> Films - $title </h1> <p>$title- $ligne[releaseDate] <br> $originTitle <br> $overview <br> $tagline</p>");
+        $moviePage->appendContent("<hearder><h1>Films - $title</h1></hearder> <p> $title     date de sortie : $ligne[releaseDate] <br> Titre d'origine : $originTitle <br> Slogan : $tagline <br> Resumer :  $overview </p>");
     }
 
 
