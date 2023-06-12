@@ -24,7 +24,7 @@ class WebPage
     /**
      * @return string
      */
-    public function getHead()
+    public function getHead() : string
     {
         return $this->head;
     }
@@ -32,7 +32,7 @@ class WebPage
     /**
      * @return string
      */
-    public function getTitle()
+    public function getTitle() : string
     {
         return $this->title;
     }
@@ -40,7 +40,7 @@ class WebPage
     /**
      * @return string
      */
-    public function getBody()
+    public function getBody() : string
     {
         return $this->body;
     }
@@ -140,16 +140,13 @@ class WebPage
 
     }
 
-
     /**
      * @return string
      */
     public static function getLastModification(): string
+    
     {
-        return date(getlastmod());
+        return date( "l jS \of F Y h:i:s A", getlastmod());
     }
-
-
-
 
 }
