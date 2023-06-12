@@ -19,9 +19,9 @@ if(isset($_GET["nombre"])){
     $requetes1 -> execute([$Id]);
 
     while(($ligne = $requetes1->fetch()) !== false) {
-        $name = $actorPage->escapeString($ligne['title']);
-        $placeOfBirth = $actorPage->escapeString($ligne['originalTitle']);
-        $biography = $actorPage->escapeString($ligne['tagline']);
+        $name = $actorPage->escapeString($ligne['name']);
+        $placeOfBirth = $actorPage->escapeString($ligne['placeOfBirth']);
+        $biography = $actorPage->escapeString($ligne['biography']);
         $actorPage -> setTitle(" Films - $name");
         $actorPage->appendContent("<hearder><h1>Films - $name</h1></hearder> <p> $name <br> lieu de naissance : $placeOfBirth <br> date de naissance : $ligne[birthday] <br> date de mort : $ligne[deathday] <br> Biographie : $biography </p>");
     }
