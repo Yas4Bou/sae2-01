@@ -1,32 +1,31 @@
 <?php
 declare(strict_types=1);
+
 require_once '../vendor/autoload.php';
+
 use Database\MyPdo;
 
 use Css\AppWebPage;
 
-$title = "Film" ;
-$moviePage = new AppWebPage($title);
+use Entity\movieCollectionRequete1;
+
+$moviePage = new AppWebPage();
 
 if(isset($_GET["nombre"])){
     $Id = $_GET['nombre'];
 
-    $requetes1 = MyPDO::getInstance()->prepare(
-        <<<'SQL'
-        SELECT id, title, releaseDate, originalTitle, overview , tagline
-        FROM movie
-        WHERE id = ? ;
-    SQL);
+   $requetes1 = new movieCollectionRequete1();
+   $tableau1 = $requetes1 ->findAll($Id);
 
-    $requetes1 -> execute([$Id]);
 
-    while(($ligne = $requetes1->fetch()) !== false) {
-        $title = $moviePage->escapeString($ligne['title']);
-        $originTitle = $moviePage->escapeString($ligne['originalTitle']);
-        $tagline = $moviePage->escapeString($ligne['tagline']);
-        $overview = $moviePage->escapeString($ligne['overview']);
+   foreach ($tableau1  as $key => $value) {
+        $title = $moviePage->escapeString($value->getTitle());
+        $originTitle = $moviePage->escapeString($value->getOriginaltitle());
+        $tagline = $moviePage->escapeString($value->getTagline());
+        $overview = $moviePage->escapeString($value->getOverview());
         $moviePage -> setTitle(" Films - $title");
-        $moviePage->appendContent("<p> $title     date de sortie : $ligne[releaseDate] <br> Titre d'origine : $originTitle <br> Slogan : $tagline <br> Resumer :  $overview </p>");
+        $releaseDate = $value->getReleaseDate();
+        $moviePage->appendContent("<p> $title     date de sortie : $releaseDate <br> Titre d'origine : $originTitle <br> Slogan : $tagline <br> Resumer :  $overview </p>");
     }
     $requetes2 = MyPDO::getInstance()->prepare(
         <<<'SQL'
