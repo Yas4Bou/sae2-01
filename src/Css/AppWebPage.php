@@ -21,7 +21,7 @@ class AppWebPage extends WebPage
         $text = "<!doctype html>\n<html lang=\"fr\">\n";
         $text .= "<head>\n";
         $text .= "<meta charset='UTF-8' name='viewport'>\n";
-        $text .= "<title>\n" . $this->escapeString($this->getTitle()) . "\n</title>";
+        $text .= "<title>\n" . "<h1>\n" . $this->escapeString($this->getTitle()) . "</h1>\n" ."\n</title>";
         $text .= "\n" . $this->getHead() . "\n</head>\n";
         $text .= "<body>\n";
         $text .= $this->getBody() . "\n";
