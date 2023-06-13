@@ -3,28 +3,24 @@ declare(strict_types=1);
 require_once '../vendor/autoload.php';
 use Database\MyPdo;
 use Css\AppWebPage;
-
+use Entity\actorCollectionRequete1;
 
 $actorPage = new AppWebPage();
 
 if(isset($_GET["nombre"])){
     $Id = $_GET['nombre'];
 
-    $requetes1 = MyPDO::getInstance()->prepare(
-        <<<'SQL'
-        SELECT id, name, placeOfBirth, birthday, deathday, biography 
-        FROM people
-        WHERE id = ? ;
-    SQL);
+    $requetes1 = new actorCollectionRequete1();
+    $tableau1 = $requetes1 ->findAll($Id);
 
-    $requetes1 -> execute([$Id]);
-
-    while(($ligne = $requetes1->fetch()) !== false) {
-        $name = $actorPage->escapeString($ligne['name']);
-        $placeOfBirth = $actorPage->escapeString($ligne['placeOfBirth']);
-        $biography = $actorPage->escapeString($ligne['biography']);
+    foreach ($tableau1  as $key => $value) {
+        $name = $actorPage->escapeString($value->getName());
+        $placeOfBirth = $actorPage->escapeString($value->getPlaceOfBirth());
+        $biography = $actorPage->escapeString($value->getBiography());
+        $birthday = $value->getBirthday();
+        $deathday = $value->getDeath();
         $actorPage -> setTitle(" Films - $name");
-        $actorPage->appendContent("<p> $name <br> lieu de naissance : $placeOfBirth <br> date de naissance : $ligne[birthday] <br> date de mort : $ligne[deathday] <br> Biographie : $biography </p>");
+        $actorPage->appendContent("<p> $name <br> lieu de naissance : $placeOfBirth <br> date de naissance : $birthday <br> date de mort : $deathday <br> Biographie : $biography </p>");
     }
 
 
