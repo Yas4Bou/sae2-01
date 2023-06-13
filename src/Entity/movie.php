@@ -8,13 +8,13 @@ class movie
 {
     private int $posterId;
     private string $originalLanguage;
-    private string $originaltitle;
     private string $overview;
     private string $releaseDate;
     private int $runtime;
     private string $tagline;
     private string $title;
     private int $id;
+    private string $originalTitle;
 
     /**
     * @return int
@@ -33,11 +33,11 @@ class movie
     }
 
     /**
-    * @return string
-    */
-    public function getOriginaltitle(): string
+     * @return int
+     */
+    public function getOriginalTitle(): string
     {
-        return $this->originaltitle;
+        return $this->originalTitle;
     }
 
     /**
