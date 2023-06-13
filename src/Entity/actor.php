@@ -14,7 +14,7 @@ class actor
     private string $placeOfBirth;
     private int $id;
 
-    
+
     /**
     * @return int
     */
