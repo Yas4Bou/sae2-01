@@ -5,23 +5,18 @@ require_once '../vendor/autoload.php';
 
 use Database\MyPdo;
 use Html\WebPage;
+use Entity\homeCollection;
 
 $homePage = new WebPage();
 $homePage ->setTitle("Films");
 $homePage ->appendContent("<header><h1>Films</h1></header>");
-$requete = MyPDO::getInstance()->prepare(
-    <<<'SQL'
-    SELECT id, title
-    FROM movie
-    ORDER BY title; 
-SQL
-);
+$requete = new homeCollection();
+$tableau = $requete ->findAll();
 
-$requete->execute();
-
-while (($ligne = $requete->fetch()) !== false) {
-    $l = $homePage->escapeString($ligne['title']);
-    $homePage->appendContent("<a href='http://localhost:8000/moviePage.php?nombre=$ligne[id]'>$l</a><br>");
+foreach ($tableau  as $key => $value) {
+    $l = $homePage->escapeString($value ->getTitle());
+    $id = $value ->getId(); 
+    $homePage->appendContent("<a href='http://localhost:8000/moviePage.php?nombre=$id '>$l</a><br>");
 }
 
 $date = $homePage ->getLastModification();
