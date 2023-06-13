@@ -14,6 +14,7 @@ class movie
     private int $runtime;
     private string $tagline;
     private string $title;
+    private int $id;
 
     /**
     * @return int
@@ -69,13 +70,25 @@ class movie
     public function getTagline(): string
     {
         return $this->tagline;
-    }/**
- * @return string
- */
-public function getTitle(): string
-{
-    return $this->title;
-}
+    }
+
+    /**
+    * @return string
+    */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+    * @return int
+    */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+
 
 
 
