@@ -2,9 +2,11 @@
 declare(strict_types=1);
 require_once '../vendor/autoload.php';
 use Database\MyPdo;
-use Html\WebPage;
 
-$moviePage = new WebPage();
+use Css\AppWebPage;
+
+$title = "Film" ;
+$moviePage = new AppWebPage($title);
 
 if(isset($_GET["nombre"])){
     $Id = $_GET['nombre'];
@@ -53,4 +55,4 @@ else{
     header("Location : http://localhost:8000/homePage.php", true, 302);
     exit(1);
 }
-echo $moviePage->TOHTML();
+echo $moviePage->toHtml();
