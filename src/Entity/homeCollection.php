@@ -24,9 +24,7 @@ class homeCollection
 
 
         $requete -> execute();
-        return $requete->fetchAll(PDO::FETCH_CLASS, "movie");
+        $requete -> setFetchMode(MyPdo::FETCH_CLASS, \Entity\movie::class);
+        return $requete->fetchAll();
     }
-}
-
-
 }
