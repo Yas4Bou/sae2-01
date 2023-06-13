@@ -24,7 +24,6 @@ class AppWebPage extends WebPage
         $text .= "<title>\n" . $this->escapeString($this->getTitle()) . "\n</title>";
         $text .= "\n" . $this->getHead() . "\n</head>\n";
         $text .= "<body>\n";
-        $text .= "<header>" . "<h1>" . $this->escapeString($this->getTitle()) . "</h1>" . "</header>";
         $text .= $this->getBody() . "\n";
         $text .= "</body>\n</html>";
         return $text;
