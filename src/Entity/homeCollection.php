@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Entity;
 
-namespace Entity;
-
 use Database\MyPdo;
 use Entity\movie;
 class homeCollection
@@ -17,16 +15,15 @@ class homeCollection
     {
         $requete =  MyPDO::getInstance()->prepare(
             <<<'SQL'
-            SELECT id, title
+            SELECT posterId , originalLanguage, originalTitle, overview, releaseDate, runtime, tagline, title, id
             FROM movie
             ORDER BY title; 
         SQL);
 
 
         $requete -> execute();
-        return $requete->fetchAll(PDO::FETCH_CLASS, "movie");
+        $requete -> setFetchMode(MyPdo::FETCH_CLASS, \Entity\movie::class);
+        return $requete->fetchAll();
     }
 }
 
-
-}
