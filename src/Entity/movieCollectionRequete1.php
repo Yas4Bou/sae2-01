@@ -13,7 +13,7 @@ class movieCollectionRequete1
      * Cette methode retourne un tableau qui contient tous les artists de la base de données, dans l'ordre alphabetique
      * @return \Entity\movie[]
      */
-    public function findAll(int $Id)
+    public function findAll( string $Id)
     {
         $requete =  MyPDO::getInstance()->prepare(
             <<<'SQL'
