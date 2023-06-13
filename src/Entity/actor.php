@@ -6,9 +6,9 @@ namespace Entity;
 
 class actor
 {
+    private string|null $death;
     private int $avatarId ;
-    private string $birthday;
-    private string $deathday;
+    private string|null $birthday;
     private string $name;
     private string $biography;
     private string $placeOfBirth;
@@ -28,16 +28,13 @@ class actor
     */
     public function getBirthday(): string
     {
+        if (is_null($this->birthday))
+        {
+            $this->birthday = " incon";
+        }
         return $this->birthday;
     }
 
-    /**
-    * @return string
-    */
-    public function getDeathday(): string
-    {
-        return $this->deathday;
-    }
 
     /**
     * @return string
@@ -70,6 +67,20 @@ class actor
     {
         return $this->id;
     }
+
+    /**
+     * getter de la date de mort
+     * @return string|null
+     */
+    public function getDeath(): string
+    {
+        if (is_null($this->death)){
+            $this->death = "encore vivant";
+        }
+        return $this->death;
+    }
+
+
 
 
 }
