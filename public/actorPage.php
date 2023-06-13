@@ -2,9 +2,10 @@
 declare(strict_types=1);
 require_once '../vendor/autoload.php';
 use Database\MyPdo;
-use Html\WebPage;
+use Css\AppWebPage;
 
-$actorPage = new WebPage();
+
+$actorPage = new AppWebPage();
 
 if(isset($_GET["nombre"])){
     $Id = $_GET['nombre'];
@@ -23,7 +24,7 @@ if(isset($_GET["nombre"])){
         $placeOfBirth = $actorPage->escapeString($ligne['placeOfBirth']);
         $biography = $actorPage->escapeString($ligne['biography']);
         $actorPage -> setTitle(" Films - $name");
-        $actorPage->appendContent("<hearder><h1>Films - $name</h1></hearder> <p> $name <br> lieu de naissance : $placeOfBirth <br> date de naissance : $ligne[birthday] <br> date de mort : $ligne[deathday] <br> Biographie : $biography </p>");
+        $actorPage->appendContent("<p> $name <br> lieu de naissance : $placeOfBirth <br> date de naissance : $ligne[birthday] <br> date de mort : $ligne[deathday] <br> Biographie : $biography </p>");
     }
 
 
