@@ -4,12 +4,10 @@ declare(strict_types=1);
 require_once '../vendor/autoload.php';
 
 use Database\MyPdo;
-use Html\WebPage;
+use Css\AppWebPage;
 use Entity\homeCollection;
 
-$homePage = new WebPage();
-$homePage ->setTitle("Films");
-$homePage ->appendContent("<header><h1>Films</h1></header>");
+$homePage = new AppWebPage('Film');
 $requete = new homeCollection();
 $tableau = $requete ->findAll();
 
