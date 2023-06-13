@@ -17,7 +17,7 @@ class homeCollection
     {
         $requete =  MyPDO::getInstance()->prepare(
             <<<'SQL'
-            SELECT id, title
+            SELECT posterId , originalLanguage, originalTitle, overview, releaseDate, runtime, tagline, title, id
             FROM movie
             ORDER BY title; 
         SQL);
