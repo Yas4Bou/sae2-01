@@ -13,7 +13,6 @@ class AppWebPage extends WebPage
     public function __construct(string $title = "")
     {
         \Html\WebPage::__construct($title);
-        $this->appendCssUrl("/css/style.css");
     }
 
     public function toHtml(): string
