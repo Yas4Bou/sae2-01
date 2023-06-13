@@ -26,7 +26,7 @@ if(isset($_GET["nombre"])){
         $tagline = $moviePage->escapeString($ligne['tagline']);
         $overview = $moviePage->escapeString($ligne['overview']);
         $moviePage -> setTitle(" Films - $title");
-        $moviePage->appendContent("<hearder><h1>Films - $title</h1></hearder> <p> $title     date de sortie : $ligne[releaseDate] <br> Titre d'origine : $originTitle <br> Slogan : $tagline <br> Resumer :  $overview </p>");
+        $moviePage->appendContent("<p> $title     date de sortie : $ligne[releaseDate] <br> Titre d'origine : $originTitle <br> Slogan : $tagline <br> Resumer :  $overview </p>");
     }
     $requetes2 = MyPDO::getInstance()->prepare(
         <<<'SQL'
