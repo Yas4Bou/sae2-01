@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use Entity\cover;
@@ -16,17 +17,15 @@ try {
 } catch (Exception) {
     http_response_code(500);
 }
-if(isset($_GET['imageID'])){
+if(isset($_GET['imageID'])) {
     $Id = $_GET['imageID'];
-    if ($Id === 0 ){
-        echo file_get_contents("Image\actor.jpeg");
-    }
     $image= new cover();
     $image = cover::findById($Id);
     header("Content-Type : image/jpeg");
     echo $image->getJpeg();
-    }
-else {
-    throw new \Entity\Excpetion\ParameterException();
-}
+} elseif(isset($_GET['type'])) {
+    $Id = $_GET['type'];
+    header("Content-Type : image/jpeg");
+    echo file_get_contents("Image\actor.png");
 
+}
