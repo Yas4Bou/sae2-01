@@ -16,7 +16,7 @@ foreach ($tableau  as $key => $value) {
     $l = $homePage->escapeString($value ->getTitle());
     $id = $value ->getId();
     $posterId = $value->getPosterId();
-    $homePage->appendContent("<div class='movie-items'><img src= 'image.php?imageID=$posterId'> <a href='http://localhost:8000/moviePage.php?nombre=$id'>$l</a></div>");
+    $homePage->appendContent("<div class='movie-items'><a href='http://localhost:8000/moviePage.php?nombre=$id'><img src= 'image.php?imageID=$posterId' width='100px' height='150px'> <br>$l</a></div>");
 }
 
 $homePage->appendContent("</div>");
