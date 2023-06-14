@@ -11,7 +11,7 @@ $actorPage = new AppWebPage();
 
 if(isset($_GET["nombre"])) {
     $Id = $_GET['nombre'];
-
+    $actorPage->appendContent('<div class="menu"> <a href="http://localhost:8000/homePage.php">Menu</a> </div>'); 
     $value1 = actor::findAll($Id);
 
     $name = $actorPage->escapeString($value1->getName());
