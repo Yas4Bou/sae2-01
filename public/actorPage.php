@@ -20,8 +20,10 @@ if(isset($_GET["nombre"])){
         $biography = $actorPage->escapeString($value->getBiography());
         $birthday = $value->getBirthday();
         $deathday = $value->getDeath();
+        $avatarId = $value ->getAvatarId(); 
         $actorPage -> setTitle(" Films - $name");
         $actorPage->appendContent("<div class='menu'> 
+                                    <img src= 'image.php?imageID=$avatarId' width='100px' height='150px'>
                                     <article class='menu__item'>$name  </article> 
                                     <article class='menu__item'>Lieu de naissance : $placeOfBirth </article>
      

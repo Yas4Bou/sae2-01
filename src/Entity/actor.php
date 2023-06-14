@@ -7,7 +7,7 @@ namespace Entity;
 class actor
 {
     private string|null $death;
-    private int $avatarId ;
+    private int|null $avatarId ;
     private string|null $birthday;
     private string $name;
     private string $biography;
@@ -16,10 +16,14 @@ class actor
 
 
     /**
-    * @return int
-    */
+     * @return int
+     */
     public function getAvatarId(): int
     {
+        if (is_null($this->avatarId))
+        {
+            $this->avatarId = 0;
+        }
         return $this->avatarId;
     }
 
