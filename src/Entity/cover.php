@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Entity;
 
 use Entity\Excpetion;
+use Database\MyPdo;
 
 
 class cover
@@ -37,18 +38,19 @@ class cover
             <<<'SQL'
             SELECT id , jpeg 
             FROM  image 
-            WHERE id = ?; 
+            WHERE id = :id ; 
         SQL
         );
 
-        $requete -> execute([$Id]);
-        $requete -> setFetchMode(MyPdo::FETCH_CLASS, \Entity\cover::class);
+        $requete -> execute([":id"=>$Id]);
+        $requete -> setFetchMode(MyPdo::FETCH_CLASS, cover::class);
+        $tab = $requete ->fetch();
 
-        if($ligne = $requete->fetch() != false){
-            return $ligne;
+        if(!$tab){
+            throw new Excpetion\EntityNotFoundException("id : {$Id} Cette image n'existe pas ");
         }
         else {
-            throw new Excpetion\EntityNotFoundException();
+            return $tab;
         }
     }
 }
