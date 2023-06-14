@@ -2,6 +2,7 @@
 declare(strict_types=1);
 
 namespace Html\Form;
+use Html\StringEscaper;
 use Entity\actor;
 
 class ActorForm
@@ -15,6 +16,7 @@ class ActorForm
     {
         $this->actor = $actor;
     }
+
 
     /**
      * @return actor|null
@@ -38,7 +40,7 @@ class ActorForm
             $html .= '<input type="hidden" name="id" value="' . $this->actor?->getId() . '">';
 
             $html .= '<label for="name">Nom:</label>';
-            $html .= '<input type="text" name="name" value="' . ($this->actor?->getName() ?? '') . '" required>';
+            $html .= '<input type="text" name="name" value="' . $this->escapeString($this->actor?->getName() ?? '') . '" required>';
         }
         
         $html .= '<button type="submit">Enregistrer</button>';
