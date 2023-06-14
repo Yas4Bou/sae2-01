@@ -67,6 +67,54 @@ body {
     color:white;
 }
 
+
+.info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex-wrap: wrap;
+    gap: 10px;
+    border: 1px solid white;
+    padding: 10px;
+}
+
+.info__item {
+    display: flex;
+    flex-direction: column; 
+    border: 1px solid white;
+    border-style: dashed;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+
+.main {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex-wrap: wrap-reverse;
+    gap: 10px;
+    border: 1px solid white;
+    padding: 10px;
+}
+
+.main__item {
+    border: 1px solid white;
+    border-style: dashed;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+a {
+  color: red;
+}
+
+a:hover {
+  color: white;
+}
+
 header {
     display: flex;
     justify-content: center;
