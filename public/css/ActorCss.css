@@ -102,24 +102,16 @@ footer {
 
 @media (max-width: 600px) {
     footer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         border: 1px solid white;
-        padding: 10px;
         background-color: rgba(255, 0, 0, 0.78);
         color: black;
+
     }
 }
 
 @media (min-width: 601px) and (max-width: 1000px) {
     footer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid;
         border-color: #b7b4b4;
-        padding: 10px;
         color: #b7b4b4;
     }
 
@@ -127,11 +119,7 @@ footer {
 
 @media (min-width: 1001px) {
     footer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         border: 1px solid darkred;
-        padding: 10px;
         color: darkred;
     }
 }
