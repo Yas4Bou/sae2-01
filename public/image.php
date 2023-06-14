@@ -18,6 +18,9 @@ try {
 }
 if(isset($_GET['imageID'])){
     $Id = $_GET['imageID'];
+    if ($Id === 0 ){
+        echo file_get_contents("Image\default.jpeg");
+    }
     $image= new cover();
     $image = cover::findById($Id);
     header("Content-Type : image/jpeg");
