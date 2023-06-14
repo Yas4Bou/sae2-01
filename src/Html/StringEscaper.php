@@ -11,4 +11,13 @@ trait StringEscaper
             return htmlspecialchars($string, ENT_QUOTES | ENT_HTML5);
         }
     }
+
+    public function stripTagsAndTrim(?string $string): string
+    {
+        if ($string === null) {
+            return '';
+        } else {
+            return trim(strip_tags($string));
+        }
+    }
 }
