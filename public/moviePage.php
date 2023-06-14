@@ -18,6 +18,8 @@ if(isset($_GET["nombre"])){
 
    foreach ($tableau1  as $key => $value) {
         $title = $moviePage->escapeString($value->getTitle());
+        $menu = '<div class="menu"> <a href="http://localhost:8000/homePage.php">Menu</a> </div>';
+        $moviePage->appendContent($menu);
         $originTitle = $moviePage->escapeString($value->getOriginaltitle());
         $tagline = $moviePage->escapeString($value->getTagline());
         $overview = $moviePage->escapeString($value->getOverview());
