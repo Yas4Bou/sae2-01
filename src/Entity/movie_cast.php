@@ -53,7 +53,7 @@ class movie_cast
      * Cette methode retourne un tableau qui contient tous les Acteurs et leurs role de la base de données, dans l'ordre alphabetique
      * @return \Entity\movie_cast[]
      */
-    public static function findAll(string $Id) : movie_cast
+    public static function findAll(string $Id) : array
     {
         $requete =  MyPDO::getInstance()->prepare(
             <<<'SQL'
@@ -68,14 +68,7 @@ class movie_cast
 
         $requete -> execute([$Id]);
         $requete -> setFetchMode(MyPdo::FETCH_CLASS, \Entity\movie_cast::class);
-        $tab = $requete ->fetch();
-
-        if(!$tab){
-            throw new Excpetion\EntityNotFoundException("id : {$Id} Cet acteur n'existe pas ");
-        }
-        else {
-            return $tab;
-        }
+        return $requete->fetchAll();
     }
 
 
