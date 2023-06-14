@@ -56,6 +56,7 @@ class actor
 
     /**
      * cette méthode save() retourne l'instance courante pour permettre le chaînage des méthodes
+     * Cette méthode met à jour le "name" de la table "people" pour la ligne dont l'"id" est celui de l'instance courante
      * @return $this
      */
     public function save(): self
