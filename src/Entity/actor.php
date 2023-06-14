@@ -14,77 +14,47 @@ class actor
     private string $name;
     private string $biography;
     private string $placeOfBirth;
-    private int $id;
+    private ?int $id;
 
 
     /**
-     * @return int
+     * @return string
      */
-    public function getAvatarId(): int
-    {
-        if (is_null($this->avatarId))
-        {
-            $this->avatarId = 0;
-        }
-        return $this->avatarId;
-    }
-
-    /**
-    * @return string
-    */
-    public function getBirthday(): string
-    {
-        if (is_null($this->birthday))
-        {
-            $this->birthday = " inconue";
-        }
-        return $this->birthday;
-    }
-
-
-    /**
-    * @return string
-    */
     public function getName(): string
     {
         return $this->name;
     }
 
     /**
-    * @return string
-    */
-    public function getBiography(): string
+     * @param string $name
+     * @return actor
+     */
+    public function setName(string $name): actor
     {
-        return $this->biography;
+        $this->name = $name;
+        return $this;
     }
 
-    /**
-    * @return string
-    */
-    public function getPlaceOfBirth(): string
-    {
-        return $this->placeOfBirth;
-    }
 
     /**
-    * @return int
-    */
-    public function getId(): int
+     * @return int|null
+     */
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * getter de la date de mort
-     * @return string|null
+     * @param int|null $id
+     * @return actor
      */
-    public function getDeath(): string
+    private function setId(?int $id): actor
     {
-        if (is_null($this->death)){
-            $this->death = "encore vivant";
-        }
-        return $this->death;
+        $this->id = $id;
+        return $this;
     }
+
+    
 
     /**
      * Cette methode retourne un tableau qui contient toutes les information des acteurs de la base de données
