@@ -21,9 +21,17 @@ if(isset($_GET["nombre"])){
         $originTitle = $moviePage->escapeString($value->getOriginaltitle());
         $tagline = $moviePage->escapeString($value->getTagline());
         $overview = $moviePage->escapeString($value->getOverview());
-        $moviePage -> setTitle(" Films - $title");
+        $moviePage -> setTitle(" Film - $title");
         $releaseDate = $value->getReleaseDate();
-        $moviePage->appendContent("<p> $title     date de sortie : $releaseDate <br> Titre d'origine : $originTitle <br> Slogan : $tagline <br> Resumer :  $overview </p>");
+        $moviePage->appendContent("<nav> 
+                               <div class='info'>
+                                 <article class='info__item'> $title </article>    
+                                 <article class='info__item'> Date de sortie : $releaseDate </article> 
+                                 <article class='info__item'> Titre d'origine : $originTitle </article>  
+                                 <article class='info__item'> Slogan : $tagline </article> 
+                                 <article class='info__item'> Résumer :  $overview </article> 
+                                    </div>
+                                   </nav>");
    }
    $requetes2 = new movieCollectionRequete2();
    $tableau2 = $requetes2->findAll($Id);
@@ -33,7 +41,10 @@ if(isset($_GET["nombre"])){
         $name = $moviePage->escapeString($value->getName());
         $role = $moviePage->escapeString($value->getRole());
         $id = $value->getId();
-        $moviePage->appendContent("<a href='http://localhost:8000/actorPage.php?nombre=$id'>Role : $role <br> vrai nom : $name </a></p>\n");
+        $moviePage->appendContent("<div class='main'>
+                               <article class='main__item'><a href='http://localhost:8000/actorPage.php?nombre=$id'>Role : $role</a></article>
+                               <article class='main__item'><a href='http://localhost:8000/actorPage.php?nombre=$id'>Vrai nom : $name</a></article>
+                           </div>");
    }
 
 
@@ -45,4 +56,84 @@ else{
     header("Location : http://localhost:8000/homePage.php", true, 302);
     exit(1);
 }
+
+$css = "
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    gap: 0.5em 2em;
+    background-color: black;
+    color:white;
+}
+
+
+.info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex-wrap: wrap;
+    gap: 10px;
+    border: 1px solid white;
+    padding: 10px;
+}
+
+.info__item {
+    display: flex;
+    flex-direction: column; 
+    border: 1px solid white;
+    border-style: dashed;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+
+.main {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex-wrap: wrap-reverse;
+    gap: 10px;
+    border: 1px solid white;
+    padding: 10px;
+}
+
+.main__item {
+    border: 1px solid white;
+    border-style: dashed;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+a {
+  color: red;
+}
+
+a:hover {
+  color: white;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: red;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    padding: 10px;
+}
+";
+$moviePage->appendCss($css);
+
+
 echo $moviePage->toHtml();
