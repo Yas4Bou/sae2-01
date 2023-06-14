@@ -14,76 +14,264 @@ class actor
     private string $name;
     private string $biography;
     private string $placeOfBirth;
-    private int $id;
-
+    private ?int $id;
 
     /**
-     * @return int
+     * @param int|null $id
+     * @param string $name
+     * @param string|null $death
+     * @param int|null $avatarId
+     * @param string|null $birthday
+     * @param string $biography
+     * @param string $placeOfBirth
      */
-    public function getAvatarId(): int
+    private function __construct(?int $id, string $name, string|null $death, int|null $avatarId, string|null $birthday, string $biography, string $placeOfBirth){
+        $this->name = $name;
+        $this->id= $id;
+        $this->death= $death;
+        $this->avatarId= $avatarId;
+        $this->birthday= $birthday;
+        $this->biography= $biography;
+        $this->placeOfBirth= $placeOfBirth;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDeath(): ?string
     {
-        if (is_null($this->avatarId))
-        {
-            $this->avatarId = 0;
-        }
+        return $this->death;
+    }
+
+    /**
+     * @param string|null $death
+     * @return actor
+     */
+    public function setDeath(?string $death): actor
+    {
+        $this->death = $death;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getAvatarId(): ?int
+    {
         return $this->avatarId;
     }
 
     /**
-    * @return string
-    */
-    public function getBirthday(): string
+     * @param int|null $avatarId
+     * @return actor
+     */
+    public function setAvatarId(?int $avatarId): actor
     {
-        if (is_null($this->birthday))
-        {
-            $this->birthday = " inconue";
-        }
+        $this->avatarId = $avatarId;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBirthday(): ?string
+    {
         return $this->birthday;
     }
 
-
     /**
-    * @return string
-    */
-    public function getName(): string
+     * @param string|null $birthday
+     * @return actor
+     */
+    public function setBirthday(?string $birthday): actor
     {
-        return $this->name;
+        $this->birthday = $birthday;
+        return $this;
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getBiography(): string
     {
         return $this->biography;
     }
 
     /**
-    * @return string
-    */
+     * @param string $biography
+     * @return actor
+     */
+    public function setBiography(string $biography): actor
+    {
+        $this->biography = $biography;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function getPlaceOfBirth(): string
     {
         return $this->placeOfBirth;
     }
 
     /**
-    * @return int
-    */
-    public function getId(): int
+     * @param string $placeOfBirth
+     * @return actor
+     */
+    public function setPlaceOfBirth(string $placeOfBirth): actor
+    {
+        $this->placeOfBirth = $placeOfBirth;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return actor
+     */
+    public function setName(string $name): actor
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+
+    /**
+     * @return int|null
+     */
+    public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * getter de la date de mort
-     * @return string|null
+     * @param int|null $id
+     * @return actor
      */
-    public function getDeath(): string
+    private function setId(?int $id): actor
     {
-        if (is_null($this->death)){
-            $this->death = "encore vivant";
+        $this->id = $id;
+        return $this;
+    }
+
+    /**
+     * Cette méthode de classe de classe prend en paramère un nom "name" et un identifiant "id"
+     * @param string $name
+     * @param int|null $id
+     * Cette méthode de classe affecte le nom ("name") avec le 1er paramètre de la méthode
+     * et l'identifiant ("id") avec le 2nd parametre facultatif de la méthode
+     * Cette méthode de classe retourne l'instance crée
+     * @return static
+     */
+    public static function create(string $name, ?int $id, string|null $death, int|null $avatarId, string|null $birthday, string $biography, string $placeOfBirth): actor
+    {
+        $actor = new actor();
+
+        $actor->name = $name;
+        $actor->biography = $biography;
+        $actor->placeOfBirth= $placeOfBirth;
+
+        if ($id !== null) { $actor->id = $id;}
+        if ($death !== null) { $actor->death = $death;}
+        if ($avatarId !== null) { $actor->avatarId = $avatarId;}
+        if ($birthday !== null) { $actor->birthday = $birthday;}
+
+        return $actor;
+    }
+
+    /**
+     * cette méthode d'instance déclenche « insert() » ou « update() » selon que la valeur de « id » est respectivement « null » ou non
+     * @return $this
+     */
+    public function save(): actor{
+        if ($this->id === null) {
+            return $this->insert();
+        } else {
+            return $this->update();
         }
-        return $this->death;
+    }
+
+
+    /**
+     * cette méthode exécute la requête d'insertion dans la table « pepole »
+     * et met à jour l'identifiant de l'instance courante avec le dernier identifiant créé par la base de données
+     * @return $this
+     */
+    public function insert(): actor
+    {
+        $requete = MyPDO::getInstance()->prepare(
+            <<<'SQL'
+                INSERT INTO people (name, biography, placeOfBirth, birthday, death, avatarId)
+                VALUES (?, ?, ?, ?, ?, ?);
+                SQL
+        );
+        $requete->execute([$this->name, $this->biography, $this->placeOfBirth, $this->birthday, $this->death, $this->avatarId]);
+        $int = (int)MyPDO::getInstance()->lastInsertId();
+        $this->id= $int;
+
+        $requete -> setFetchMode(MyPdo::FETCH_CLASS, actor::class);
+        $tab = $requete ->fetch();
+        if(!$tab){
+            throw new Excpetion\EntityNotFoundException("L'acteur avec l'ID {$this->id} n'existe pas.");
+        }
+
+        return $this;
+    }
+
+    /**
+     * cette méthode save() retourne l'instance courante pour permettre le chaînage des méthodes
+     * Cette méthode met à jour le "name" de la table "people" pour la ligne dont l'"id" est celui de l'instance courante
+     * @return $this
+     */
+    public function update(): actor
+    {
+        $requete = MyPDO::getInstance()->prepare(
+            <<<'SQL'
+                UPDATE pepole
+                SET name = ?, biography = ?, placeOfBirth = ?, birthday = ?, death = ?, avatarId =?
+                WHERE id = ? ;
+                SQL
+        );
+
+        $requete->execute([$this->name, $this->biography, $this->placeOfBirth, $this->birthday, $this->death, $this->avatarId, $this->id]);
+        $requete -> setFetchMode(MyPdo::FETCH_CLASS, actor::class);
+        $tab = $requete ->fetch();
+        if(!$tab){
+            throw new Excpetion\EntityNotFoundException("Cet acteur n'existe pas pour l'ID : {$this->id}");
+        }
+
+        return $this;
+    }
+
+    /**
+     * cette méthode delete() retourne l'instance courante pour permettre le chaînage des méthodes
+     * @return $this
+     */
+    public function delete(): actor
+    {
+        $requete = MyPDO::getInstance()->prepare(
+            <<<'SQL'
+        DELETE FROM people
+        WHERE id = ? ;
+    SQL);
+        $requete->execute([$this->id]);
+        $requete -> setFetchMode(MyPdo::FETCH_CLASS, actor::class);
+        $tab = $requete ->fetch();
+        if(!$tab){
+            throw new Excpetion\EntityNotFoundException("id : Cet acteur n'existe pas ");
+        }
+
+        $this->id = null;
+
+        return $this;
     }
 
     /**
