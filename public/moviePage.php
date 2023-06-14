@@ -23,7 +23,15 @@ if(isset($_GET["nombre"])){
         $overview = $moviePage->escapeString($value->getOverview());
         $moviePage -> setTitle(" Films - $title");
         $releaseDate = $value->getReleaseDate();
-        $moviePage->appendContent("<p> $title     date de sortie : $releaseDate <br> Titre d'origine : $originTitle <br> Slogan : $tagline <br> Resumer :  $overview </p>");
+        $moviePage->appendContent("<nav> 
+                               <div class='info'>
+                                 <article class='info__item'> $title </article>    
+                                 <article class='info__item'> Date de sortie : $releaseDate </article> 
+                                 <article class='info__item'> Titre d'origine : $originTitle </article>  
+                                 <article class='info__item'> Slogan : $tagline </article> 
+                                 <article class='info__item'> Résumer :  $overview </article> 
+                                    </div>
+                                   </nav>");
    }
    $requetes2 = new movieCollectionRequete2();
    $tableau2 = $requetes2->findAll($Id);
@@ -33,7 +41,10 @@ if(isset($_GET["nombre"])){
         $name = $moviePage->escapeString($value->getName());
         $role = $moviePage->escapeString($value->getRole());
         $id = $value->getId();
-        $moviePage->appendContent("<a href='http://localhost:8000/actorPage.php?nombre=$id'>Role : $role <br> vrai nom : $name </a></p>\n");
+        $moviePage->appendContent("<div class='main'>
+                               <article class='main__item'><a href='http://localhost:8000/actorPage.php?nombre=$id'>Role : $role</a></article>
+                               <article class='main__item'>Vrai nom : $name</article>
+                           </div>");
    }
 
 
@@ -45,4 +56,6 @@ else{
     header("Location : http://localhost:8000/homePage.php", true, 302);
     exit(1);
 }
+
+
 echo $moviePage->toHtml();
