@@ -113,16 +113,17 @@ class actor
      */
     public function delete(): actor
     {
-        if ($this->id !== null) {
-            $requete = MyPDO::getInstance()->prepare(
-                <<<'SQL'
-                DELETE FROM people
-                WHERE id = ? ;
-            SQL
-            );
-        }
+        $requete = MyPDO::getInstance()->prepare(
+            <<<'SQL'
+        DELETE FROM people
+        WHERE id = ? ;
+    SQL);
         $requete->execute([$this->id]);
-
+        $requete -> setFetchMode(MyPdo::FETCH_CLASS, actor::class);
+        $tab = $requete ->fetch();
+        if(!$tab){
+            throw new Excpetion\EntityNotFoundException("id : {$Id} Cet acteur n'existe pas ");
+        }
 
         $this->id = null;
 
