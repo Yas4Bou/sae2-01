@@ -19,7 +19,7 @@ try {
 if(isset($_GET['imageID'])){
     $Id = $_GET['imageID'];
     if ($Id === 0 ){
-        echo file_get_contents("Image\default.jpeg");
+        echo file_get_contents("Image\actor.jpeg");
     }
     $image= new cover();
     $image = cover::findById($Id);
