@@ -187,7 +187,17 @@ class actor
         return $actor;
     }
 
-
+    /**
+     * cette méthode d'instance déclenche « insert() » ou « update() » selon que la valeur de « id » est respectivement « null » ou non
+     * @return $this
+     */
+    public function save(): actor{
+        if ($this->id === null) {
+            return $this->insert();
+        } else {
+            return $this->update();
+        }
+    }
 
 
     /**
