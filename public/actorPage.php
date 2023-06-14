@@ -21,7 +21,17 @@ if(isset($_GET["nombre"])){
         $birthday = $value->getBirthday();
         $deathday = $value->getDeath();
         $actorPage -> setTitle(" Films - $name");
-        $actorPage->appendContent("<p> $name <br> lieu de naissance : $placeOfBirth <br> date de naissance : $birthday <br> date de mort : $deathday <br> Biographie : $biography </p>");
+        $actorPage->appendContent("<div class='menu'> 
+                                    <article class='menu__item'>$name  </article> 
+                                    <article class='menu__item'>Lieu de naissance : $placeOfBirth </article>
+     
+                                      <div class='date'>
+                                        <div class='datNias'>Date de naissance : $birthday </div> 
+                                        <div class='datMort'>Date de mort : $deathday </div>
+                                        </div> 
+                                       
+                                    <article class='menu__item'>Biographie : $biography </article>
+                                    </div>");
     }
 
 
@@ -33,7 +43,15 @@ if(isset($_GET["nombre"])){
         $role = $actorPage->escapeString($value->getRole());
         $id = $value->getId();
         $releaseDate = $value->getReleaseDate();
-        $actorPage->appendContent("<a href='http://localhost:8000/moviePage.php?nombre=$id'> Titre du film : $title  Date de sortie : $releaseDate <br> Role : $role  </a></p>\n");
+        $actorPage->appendContent("<div class='conteneur'> 
+                                    <div class='film'>
+                                        <div class='title'><a href='http://localhost:8000/moviePage.php?nombre=$id'> Titre du film : $title </a> </div>
+                                        <div class='dateSortie'>Date de sortie : $releaseDate </div>
+                                    </div>
+                                    <div class='role'>
+                                        <div class='role_item'><a href='http://localhost:8000/moviePage.php?nombre=$id'> Role : $role  </a> </div>
+                                      </div>
+                                    </div>");
     }
 
     $date = $actorPage ->getLastModification();
@@ -43,4 +61,9 @@ else{
     header("Location : http://localhost:8000/homePage.php", true, 302);
     exit(1);
 }
+
+
+$actorPage->appendCssUrl("css/ActorCss.css");
+
+
 echo $actorPage->TOHTML();
