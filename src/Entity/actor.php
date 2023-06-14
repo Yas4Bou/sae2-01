@@ -55,6 +55,30 @@ class actor
     }
 
     /**
+     * Cette méthode de classe de classe prend en paramère un nom "name" et un identifiant "id"
+     * @param string $name
+     * @param int|null $id
+     * Cette méthode de classe affecte le nom ("name") avec le 1er paramètre de la méthode
+     * et l'identifiant ("id") avec le 2nd parametre facultatif de la méthode
+     * Cette méthode de classe retourne l'instance crée
+     * @return static
+     */
+    public static function create(string $name, ?int $id = null): self
+    {
+        $actor = new self();
+
+        $actor->name = $name;
+
+        if ($id !== null) {
+            $actor->id = $id;
+        }
+
+        return $actor;
+    }
+
+
+
+    /**
      * cette méthode save() retourne l'instance courante pour permettre le chaînage des méthodes
      * Cette méthode met à jour le "name" de la table "people" pour la ligne dont l'"id" est celui de l'instance courante
      * @return $this
