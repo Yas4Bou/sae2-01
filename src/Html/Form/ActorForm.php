@@ -24,5 +24,22 @@ class ActorForm
         return $this->actor;
     }
 
+    public function getHtmlForm(string $url): String
+    {
+        $html = '<form action="' . $url . '" method="POST">';
+
+        if ($this->actor !== null) {
+            $html .= '<input type="hidden" name="id" value="' . $this->actor?->getId() . '">';
+        }
+
+        $html .= '<label for="name">Nom:</label>';
+        $html .= '<input type="text" name="name" value="' . ($this->actor?->getName() ?? '') . '" required>';
+        
+        $html .= '<button type="submit">Enregistrer</button>';
+
+        $html .= '</form>';
+
+        return $html;
+    }
 
 }
