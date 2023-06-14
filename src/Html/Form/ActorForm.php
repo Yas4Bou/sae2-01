@@ -2,8 +2,8 @@
 declare(strict_types=1);
 
 namespace Html\Form;
-use Html\StringEscaper;
 use Entity\actor;
+// use Html\StringEscaper;
 
 class ActorForm
 {
