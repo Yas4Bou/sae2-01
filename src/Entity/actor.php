@@ -190,6 +190,11 @@ class actor
 
 
 
+    /**
+     * cette méthode exécute la requête d'insertion dans la table « pepole »
+     * et met à jour l'identifiant de l'instance courante avec le dernier identifiant créé par la base de données
+     * @return $this
+     */
     public function insert(): actor
     {
         $requete = MyPDO::getInstance()->prepare(
