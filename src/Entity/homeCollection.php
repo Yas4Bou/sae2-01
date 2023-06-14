@@ -8,7 +8,7 @@ use Entity\movie;
 class homeCollection
 {
     /**
-     * Cette methode retourne un tableau qui contient tous les artists de la base de données, dans l'ordre alphabetique
+     * Cette methode retourne un tableau qui contient toutes les informations des films de la base de données, dans l'ordre alphabetique
      * @return \Entity\movie[]
      */
     public function findAll()
