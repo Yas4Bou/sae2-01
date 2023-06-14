@@ -8,7 +8,7 @@ use Entity\home;
 
 $homePage = new AppWebPage('Film');
 
-$tableau = home::findAll(); 
+$tableau = home::findAll();
 
 $homePage->appendContent("<div class='movie'>");
 
