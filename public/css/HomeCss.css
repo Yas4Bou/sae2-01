@@ -34,6 +34,10 @@ a:hover {
 }
 
 header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,47 +45,44 @@ header {
     padding: 10px;
     margin-bottom: 20px;
     color: red;
+    background-color: black;
+    z-index: 999;
 }
 
 footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid white;
     padding: 10px;
-
+    background-color: black;
+    z-index: 999;
 }
 
 @media (max-width: 600px) {
     footer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         border: 1px solid white;
-        padding: 10px;
         background-color: rgba(255, 0, 0, 0.78);
         color: black;
+        
     }
 }
 
 @media (min-width: 601px) and (max-width: 1000px) {
     footer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid white;
-        padding: 10px;
+        border-color: #b7b4b4;
+        color: #b7b4b4;
     }
 
 }
 
 @media (min-width: 1001px) {
     footer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
         border: 1px solid darkred;
-        padding: 10px;
         color: darkred;
     }
 }
