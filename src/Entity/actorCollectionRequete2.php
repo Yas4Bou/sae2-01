@@ -15,7 +15,7 @@ class actorCollectionRequete2
     {
         $requete =  MyPDO::getInstance()->prepare(
             <<<'SQL'
-            SELECT m.id , title , role , releaseDate
+            SELECT m.id , title , role , releaseDate, posterId
             FROM people p , cast c , movie m 
             WHERE m.id = c.movieId 
                 AND c.peopleId = p.id 

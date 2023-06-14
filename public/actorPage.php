@@ -20,8 +20,10 @@ if(isset($_GET["nombre"])){
         $biography = $actorPage->escapeString($value->getBiography());
         $birthday = $value->getBirthday();
         $deathday = $value->getDeath();
+        $avatarId = $value ->getAvatarId();
         $actorPage -> setTitle(" Films - $name");
         $actorPage->appendContent("<div class='menu'> 
+                                    <img src= 'image.php?imageID=$avatarId' width='100px' height='150px'>
                                     <article class='menu__item'>$name  </article> 
                                     <article class='menu__item'>Lieu de naissance : $placeOfBirth </article>
      
@@ -43,7 +45,9 @@ if(isset($_GET["nombre"])){
         $role = $actorPage->escapeString($value->getRole());
         $id = $value->getId();
         $releaseDate = $value->getReleaseDate();
+        $posterId = $value->getPosterId();
         $actorPage->appendContent("<div class='conteneur'> 
+                                    <img src= 'image.php?imageID=$posterId' width='100px' height='150px'>
                                     <div class='film'>
                                         <div class='title'><a href='http://localhost:8000/moviePage.php?nombre=$id'> Titre du film : $title </a> </div>
                                         <div class='dateSortie'>Date de sortie : $releaseDate </div>
