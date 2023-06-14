@@ -16,6 +16,7 @@ class actor
     private string $placeOfBirth;
     private ?int $id;
 
+    
 
     /**
      * @return string
@@ -63,9 +64,9 @@ class actor
      * Cette méthode de classe retourne l'instance crée
      * @return static
      */
-    public static function create(string $name, ?int $id = null): self
+    public static function create(string $name, ?int $id = null): actor
     {
-        $actor = new self();
+        $actor = new actor();
 
         $actor->name = $name;
 
@@ -83,7 +84,7 @@ class actor
      * Cette méthode met à jour le "name" de la table "people" pour la ligne dont l'"id" est celui de l'instance courante
      * @return $this
      */
-    public function save(): self
+    public function save(): actor
     {
         if ($this->id !== null) {
             $requete = MyPDO::getInstance()->prepare(
@@ -103,7 +104,7 @@ class actor
      * cette méthode delete() retourne l'instance courante pour permettre le chaînage des méthodes
      * @return $this
      */
-    public function delete(): self
+    public function delete(): actor
     {
         if ($this->id !== null) {
             $requete = MyPDO::getInstance()->prepare(
