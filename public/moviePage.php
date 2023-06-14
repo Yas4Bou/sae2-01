@@ -33,23 +33,27 @@ if(isset($_GET["nombre"])){
                                     </div>
                                    </nav>");
 
-   $value = movie_cast::findAll($Id);
+
+    $tableau2 = movie_cast::findAll($Id);
 
 
-
-   $name = $moviePage->escapeString($value->getName());
-   $role = $moviePage->escapeString($value->getRole());
-   $avatarId = $value ->getAvatarId();
-   $id = $value->getId();
-   $moviePage->appendContent("<div class='main'>
+    foreach ($tableau2  as $key => $value2) {
+        $name = $moviePage->escapeString($value2->getName());
+        $role = $moviePage->escapeString($value2->getRole());
+        $avatarId = $value2 ->getAvatarId();
+        $id = $value2->getId();
+        $moviePage->appendContent("<div class='main'>
                                <img src= 'image.php?imageID=$avatarId' width='100px' height='150px'>
                                <article class='main__item'><a href='http://localhost:8000/actorPage.php?nombre=$id'>Role : $role</a></article>
                                <article class='main__item'><a href='http://localhost:8000/actorPage.php?nombre=$id'>Vrai nom : $name</a></article>
                            </div>");
+    }
 
 
 
-   $date = $moviePage ->getLastModification();
+
+
+    $date = $moviePage ->getLastModification();
    $moviePage ->appendContent("<footer>$date</footer>");
 
 }
