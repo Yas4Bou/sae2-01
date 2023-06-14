@@ -21,6 +21,8 @@ class WebPage
 
     }
 
+    use Html\StringEscaper;
+
     /**
      * @return string
      */
@@ -130,15 +132,7 @@ class WebPage
     }
 
 
-    /**
-     * @param string $string
-     * @return string
-     */
-    public function escapeString(string $string): string
-    {
-        return htmlspecialchars($string, ENT_QUOTES|ENT_HTML5);
 
-    }
 
     /**
      * @return string
