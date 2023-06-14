@@ -77,7 +77,7 @@ class actor_cast_movie
         $tab = $requete ->fetch();
 
         if(!$tab){
-            throw new Excpetion\EntityNotFoundException("id : {$Id} Cette image n'existe pas ");
+            throw new Excpetion\EntityNotFoundException("id : {$Id} Ce film n'existe pas ");
         }
         else {
             return $tab;
