@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Entity\Excpetion;
 
-class ParameterException
+class ParameterException extends EntityNotFoundException
 {
 
 }
