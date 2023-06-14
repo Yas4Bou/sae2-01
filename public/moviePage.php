@@ -57,5 +57,35 @@ else{
     exit(1);
 }
 
+$css = "
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    gap: 0.5em 2em;
+    background-color: black;
+    color:white;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: red;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    padding: 10px;
+}
+";
+$moviePage->appendCss($css);
+
 
 echo $moviePage->toHtml();
