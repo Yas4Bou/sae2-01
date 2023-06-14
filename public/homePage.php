@@ -50,6 +50,13 @@ body {
     border: 1px solid white;
     padding: 10px;
 }
+a {
+  color: red;
+}
+
+a:hover {
+  color: white;
+}
 
 header {
     display: flex;
