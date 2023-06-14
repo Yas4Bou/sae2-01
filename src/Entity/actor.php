@@ -105,10 +105,18 @@ class actor
 
 private function __construct(?int $id, string $name, string|null $death, int|null $avatarId, string|null $birthday, string $biography, string $placeOfBirth){
     $this->name = $name;
-    $this->id= $id;
-    $this->death= $death;
-    $this->avatarId= $avatarId;
-    $this->birthday= $birthday;
+    if (isset($id)){
+        $this->id= $id;
+    }
+    if(isset($death)){
+        $this->death= $death;
+    }
+    if(isset($avatarId)){
+        $this->avatarId= $avatarId;
+    }
+    if(isset($birthday)){
+        $this->birthday= $birthday;
+    }
     $this->biography= $biography;
     $this->placeOfBirth= $placeOfBirth;
 }
