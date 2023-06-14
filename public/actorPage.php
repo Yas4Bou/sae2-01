@@ -4,7 +4,7 @@ declare(strict_types=1);
 require_once '../vendor/autoload.php';
 use Database\MyPdo;
 use Css\AppWebPage;
-use Entity\actorCollectionRequete1;
+use Entity\actor;
 use Entity\actor_cast_movie;
 
 $actorPage = new AppWebPage();
@@ -12,18 +12,16 @@ $actorPage = new AppWebPage();
 if(isset($_GET["nombre"])) {
     $Id = $_GET['nombre'];
 
-    $requetes1 = new actorCollectionRequete1();
-    $tableau1 = $requetes1 ->findAll($Id);
+    $value1 = actor::findAll($Id);
 
-    foreach ($tableau1  as $key => $value) {
-        $name = $actorPage->escapeString($value->getName());
-        $placeOfBirth = $actorPage->escapeString($value->getPlaceOfBirth());
-        $biography = $actorPage->escapeString($value->getBiography());
-        $birthday = $value->getBirthday();
-        $deathday = $value->getDeath();
-        $avatarId = $value ->getAvatarId();
-        $actorPage -> setTitle(" Films - $name");
-        $actorPage->appendContent("<div class='menu'> 
+    $name = $actorPage->escapeString($value1->getName());
+    $placeOfBirth = $actorPage->escapeString($value1->getPlaceOfBirth());
+    $biography = $actorPage->escapeString($value1->getBiography());
+    $birthday = $value1->getBirthday();
+    $deathday = $value1->getDeath();
+    $avatarId = $value1 ->getAvatarId();
+    $actorPage -> setTitle(" Films - $name");
+    $actorPage->appendContent("<div class='menu'> 
                                     <img src= 'image.php?imageID=$avatarId' width='100px' height='150px'>
                                     <article class='menu__item'>$name  </article> 
                                     <article class='menu__item'>Lieu de naissance : $placeOfBirth </article>
@@ -35,7 +33,7 @@ if(isset($_GET["nombre"])) {
                                        
                                     <article class='menu__item'>Biographie : $biography </article>
                                     </div>");
-    }
+
 
     $value = actor_cast_movie::findAll($Id);
 
@@ -59,7 +57,8 @@ if(isset($_GET["nombre"])) {
 
     $date = $actorPage ->getLastModification();
     $actorPage ->appendContent("<footer>$date</footer>");
-} else {
+}
+else {
     header("Location : http://localhost:8000/homePage.php", true, 302);
     exit(1);
 }
