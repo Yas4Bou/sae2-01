@@ -54,10 +54,28 @@ class actor
         return $this;
     }
 
-    
+    /**
+     * cette méthode save() retourne l'instance courante pour permettre le chaînage des méthodes
+     * @return $this
+     */
+    public function save(): self
+    {
+        if ($this->id !== null) {
+            $requete = MyPDO::getInstance()->prepare(
+                <<<'SQL'
+                UPDATE pepole
+                SET name = ?
+                WHERE id = ? ;
+                SQL
+            );
+            $requete->execute([$this->name, $this->id]);
+        }
+
+        return $this;
+    }
 
     /**
-     * cette méthode retourne l'instance courante pour permettre le chaînage des méthodes
+     * cette méthode delete() retourne l'instance courante pour permettre le chaînage des méthodes
      * @return $this
      */
     public function delete(): self
