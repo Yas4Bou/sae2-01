@@ -7,7 +7,6 @@ body {
     color:white;
 }
 
-
 .info {
     display: flex;
     flex-direction: column;
@@ -16,6 +15,11 @@ body {
     gap: 10px;
     border: 1px solid white;
     padding: 10px;
+}
+
+.info img {
+    width: 100px;
+    height: 150px;
 }
 
 .info__item {
@@ -31,9 +35,7 @@ body {
 
 .main {
     display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    flex-wrap: wrap-reverse;
+    align-items: center;
     gap: 10px;
     border: 1px solid white;
     padding: 10px;
