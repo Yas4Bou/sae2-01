@@ -24,7 +24,7 @@ if(isset($_GET["nombre"])){
     $posterId = $value1->getPosterId();
     $moviePage->appendContent("<nav> 
                                <div class='info'>
-                                 <img src= 'image.php?imageID=$posterId' width='100px' height='150px'>
+                                 <img src= 'imageMovie.php?imageID=$posterId' width='100px' height='150px'>
                                  <article class='info__item'> $title </article>    
                                  <article class='info__item'> Date de sortie : $releaseDate </article> 
                                  <article class='info__item'> Titre d'origine : $originTitle </article>  
@@ -43,7 +43,7 @@ if(isset($_GET["nombre"])){
         $avatarId = $value2 ->getAvatarId();
         $id = $value2->getId();
         $moviePage->appendContent("<div class='main'>
-                               <img src= 'image.php?imageID=$avatarId' width='100px' height='150px'>
+                               <img src= 'imageActor.php?imageID=$avatarId' width='100px' height='150px'>
                                <article class='main__item'><a href='http://localhost:8000/actorPage.php?nombre=$id'>Role : $role</a></article>
                                <article class='main__item'><a href='http://localhost:8000/actorPage.php?nombre=$id'>Vrai nom : $name</a></article>
                            </div>");
