@@ -11,7 +11,7 @@ $moviePage = new AppWebPage();
 
 if(isset($_GET["nombre"])){
     $Id = $_GET['nombre'];
-
+    $moviePage->appendContent('<div class="menu"> <a href="http://localhost:8000/homePage.php">Menu</a> </div>');
     $value1 = movie::findAll($Id);
 
 
