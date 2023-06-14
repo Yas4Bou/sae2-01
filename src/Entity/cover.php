@@ -47,7 +47,9 @@ class cover
         $tab = $requete ->fetch();
 
         if(!$tab){
-            throw new Excpetion\EntityNotFoundException("id : {$Id} Cette image n'existe pas ");
+            $actor = 0;
+            header("Location : http://localhost:8000/image.php?type= $actor", true, 302);
+            exit(1);
         }
         else {
             return $tab;
