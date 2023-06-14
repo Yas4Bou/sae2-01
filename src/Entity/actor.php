@@ -188,7 +188,7 @@ class actor
     }
 
 
-    
+
 
     public function insert(): actor
     {
@@ -199,8 +199,8 @@ class actor
                 SQL
         );
         $requete->execute([$this->name, $this->biography, $this->placeOfBirth, $this->birthday, $this->death, $this->avatarId]);
-
-        $this->id= intval(MyPDO::getInstance()->lastInsertId());
+        $int = (int)MyPDO::getInstance()->lastInsertId();
+        $this->id= $int;
 
         $requete -> setFetchMode(MyPdo::FETCH_CLASS, actor::class);
         $tab = $requete ->fetch();
