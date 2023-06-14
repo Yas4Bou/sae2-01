@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use Entity\afficheCollection;
+use Entity\coverCollection;
 
 if(isset($_GET["nombre"])){
     $Id = $_GET['nombre'];
