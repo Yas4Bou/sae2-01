@@ -44,7 +44,7 @@ class cover
         $requete -> execute([$Id]);
         $requete -> setFetchMode(MyPdo::FETCH_CLASS, \Entity\cover::class);
 
-        if($ligne = $requete->fetchAll() !== false){
+        if($ligne = $requete->fetch() != false){
             return $ligne;
         }
         else {
