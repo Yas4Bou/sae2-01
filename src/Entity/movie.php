@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Entity;
 
+use Database\MyPdo;
+use Entity\Excpetion;
+
 class movie
 {
     private int $posterId;
@@ -89,8 +92,31 @@ class movie
     }
 
 
+    /**
+     * Cette methode retourne un tableau qui contient toutes les information d'un films de la base de données
+     * @return \Entity\movie[]
+     */
+    public static function findAll( string $Id) : movie
+    {
+        $requete =  MyPDO::getInstance()->prepare(
+            <<<'SQL'
+            SELECT posterId , originalLanguage, originalTitle, overview, releaseDate, runtime, tagline, title, id
+            FROM movie
+            WHERE id = ? ;
+        SQL);
 
 
+        $requete -> execute([$Id]);
+        $requete -> setFetchMode(MyPdo::FETCH_CLASS, \Entity\movie::class);
+        $tab = $requete ->fetch();
+
+        if(!$tab){
+            throw new Excpetion\EntityNotFoundException("id : {$Id} Ce film n'existe pas ");
+        }
+        else {
+            return $tab;
+        }
+    }
 
 
 
