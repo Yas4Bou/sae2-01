@@ -19,10 +19,110 @@ class actor
     /**
      * @param int|null $id
      * @param string $name
+     * @param string|null $death
+     * @param int|null $avatarId
+     * @param string|null $birthday
+     * @param string $biography
+     * @param string $placeOfBirth
      */
-    private function __construct(?int $id, string $name ){
+    private function __construct(?int $id, string $name, string|null $death, int|null $avatarId, string|null $birthday, string $biography, string $placeOfBirth){
         $this->name = $name;
         $this->id= $id;
+        $this->death= $death;
+        $this->avatarId= $avatarId;
+        $this->birthday= $birthday;
+        $this->biography= $biography;
+        $this->placeOfBirth= $placeOfBirth;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDeath(): ?string
+    {
+        return $this->death;
+    }
+
+    /**
+     * @param string|null $death
+     * @return actor
+     */
+    public function setDeath(?string $death): actor
+    {
+        $this->death = $death;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getAvatarId(): ?int
+    {
+        return $this->avatarId;
+    }
+
+    /**
+     * @param int|null $avatarId
+     * @return actor
+     */
+    public function setAvatarId(?int $avatarId): actor
+    {
+        $this->avatarId = $avatarId;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBirthday(): ?string
+    {
+        return $this->birthday;
+    }
+
+    /**
+     * @param string|null $birthday
+     * @return actor
+     */
+    public function setBirthday(?string $birthday): actor
+    {
+        $this->birthday = $birthday;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBiography(): string
+    {
+        return $this->biography;
+    }
+
+    /**
+     * @param string $biography
+     * @return actor
+     */
+    public function setBiography(string $biography): actor
+    {
+        $this->biography = $biography;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPlaceOfBirth(): string
+    {
+        return $this->placeOfBirth;
+    }
+
+    /**
+     * @param string $placeOfBirth
+     * @return actor
+     */
+    public function setPlaceOfBirth(string $placeOfBirth): actor
+    {
+        $this->placeOfBirth = $placeOfBirth;
+        return $this;
     }
 
     /**
@@ -71,27 +171,48 @@ class actor
      * Cette méthode de classe retourne l'instance crée
      * @return static
      */
-    public static function create(string $name, ?int $id = null): actor
+    public static function create(string $name, ?int $id, string|null $death, int|null $avatarId, string|null $birthday, string $biography, string $placeOfBirth): actor
     {
         $actor = new actor();
 
         $actor->name = $name;
+        $actor->biography = $biography;
+        $actor->placeOfBirth= $placeOfBirth;
 
-        if ($id !== null) {
-            $actor->id = $id;
-        }
+        if ($id !== null) { $actor->id = $id;}
+        if ($death !== null) { $actor->death = $death;}
+        if ($avatarId !== null) { $actor->avatarId = $avatarId;}
+        if ($birthday !== null) { $actor->birthday = $birthday;}
 
         return $actor;
     }
 
+    public function insert(): actor
+    {
+        $requete = MyPDO::getInstance()->prepare(
+            <<<'SQL'
+                INSERT INTO people (name, id)
+                VALUES (?, ?);
+                SQL
+        );
+        $requete->execute([$this->name, $this->id]);
+        $this->m MyPDO::getInstance()->lastInsertId();
 
+        $requete -> setFetchMode(MyPdo::FETCH_CLASS, actor::class);
+        $tab = $requete ->fetch();
+        if(!$tab){
+            throw new Excpetion\EntityNotFoundException("id : Cet acteur n'existe pas ");
+        }
+
+        return $this;
+    }
 
     /**
      * cette méthode save() retourne l'instance courante pour permettre le chaînage des méthodes
      * Cette méthode met à jour le "name" de la table "people" pour la ligne dont l'"id" est celui de l'instance courante
      * @return $this
      */
-    public function save(): actor
+    public function update(): actor
     {
         $requete = MyPDO::getInstance()->prepare(
             <<<'SQL'
