@@ -30,7 +30,7 @@ class actor
     {
         if (is_null($this->birthday))
         {
-            $this->birthday = " incon";
+            $this->birthday = " inconue";
         }
         return $this->birthday;
     }
