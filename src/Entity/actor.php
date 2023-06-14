@@ -16,7 +16,14 @@ class actor
     private string $placeOfBirth;
     private ?int $id;
 
-    
+    /**
+     * @param int|null $id
+     * @param string $name
+     */
+    private function __construct(?int $id, string $name ){
+        $this->name = $name;
+        $this->id= $id;
+    }
 
     /**
      * @return string
@@ -115,6 +122,7 @@ class actor
             );
         }
         $requete->execute([$this->id]);
+
 
         $this->id = null;
 
