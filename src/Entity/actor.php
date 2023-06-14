@@ -54,7 +54,22 @@ class actor
         return $this;
     }
 
-    
+    public function delete(): self
+    {
+        if ($this->id !== null) {
+            $requete = MyPDO::getInstance()->prepare(
+                <<<'SQL'
+                DELETE FROM people
+                WHERE id = ? ;
+            SQL
+            );
+        }
+        $requete->execute([$this->id]);
+
+        $this->id = null;
+
+        return $this;
+    }
 
     /**
      * Cette methode retourne un tableau qui contient toutes les information des acteurs de la base de données
