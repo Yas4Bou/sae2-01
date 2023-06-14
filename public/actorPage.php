@@ -4,6 +4,7 @@ require_once '../vendor/autoload.php';
 use Database\MyPdo;
 use Css\AppWebPage;
 use Entity\actorCollectionRequete1;
+use Entity\actorCollectionRequete2;
 
 $actorPage = new AppWebPage();
 
@@ -24,22 +25,15 @@ if(isset($_GET["nombre"])){
     }
 
 
-    $requetes2 = MyPDO::getInstance()->prepare(
-        <<<'SQL'
-        SELECT m.id , title , role , releaseDate
-        FROM people p , cast c , movie m 
-        WHERE m.id = c.movieId 
-          AND c.peopleId = p.id 
-            AND p.id = ?
-        ORDER BY role
-        SQL);
+    $requetes2 = new actorCollectionRequete2();
+    $tableau2 = $requetes2 ->findAll($Id);
 
-    $requetes2->execute([$Id]);
-
-    while (($ligne = $requetes2->fetch()) !== false) {
-        $title = $actorPage->escapeString($ligne['title']);
-        $role = $actorPage->escapeString($ligne['role']);
-        $actorPage->appendContent("<a href='http://localhost:8000/moviePage.php?nombre=$ligne[id]'> Titre du film : $title <br> Role : $role </a></p>\n");
+    foreach ($tableau2 as $key => $value) {
+        $title = $actorPage->escapeString($value->getTitle());
+        $role = $actorPage->escapeString($value->getRole());
+        $id = $value->getId();
+        $releaseDate = $value->getReleaseDate();
+        $actorPage->appendContent("<a href='http://localhost:8000/moviePage.php?nombre=$id'> Titre du film : $title  Date de sortie : $releaseDate <br> Role : $role  </a></p>\n");
     }
 
     $date = $actorPage ->getLastModification();
