@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types=1);
+
+use Entity\cover;
+use Entity\Exception\EntityNotFoundException;
+use Exception\ParameterException;
+
+try {
+    ///////////////////////
+    // À vous de jouer ! //
+    ///////////////////////
+} catch (ParameterException) {
+    http_response_code(400);
+} catch (EntityNotFoundException) {
+    http_response_code(404);
+} catch (Exception) {
+    http_response_code(500);
+}
+if(isset($_GET['imageID'])) {
+    $Id = $_GET['imageID'];
+    $image= new cover();
+    $image = cover::findById($Id);
+    header("Content-Type : imageActor/jpeg");
+    echo $image->getJpeg();
+} elseif(isset($_GET['type'])) {
+    $Id = $_GET['type'];
+    header("Content-Type : imageActor/jpeg");
+    echo file_get_contents("Image\actor.png");
+
+}
