@@ -21,7 +21,7 @@ if(isset($_GET["nombre"])){
         $originTitle = $moviePage->escapeString($value->getOriginaltitle());
         $tagline = $moviePage->escapeString($value->getTagline());
         $overview = $moviePage->escapeString($value->getOverview());
-        $moviePage -> setTitle(" Films - $title");
+        $moviePage -> setTitle(" Film - $title");
         $releaseDate = $value->getReleaseDate();
         $moviePage->appendContent("<nav> 
                                <div class='info'>
@@ -43,7 +43,7 @@ if(isset($_GET["nombre"])){
         $id = $value->getId();
         $moviePage->appendContent("<div class='main'>
                                <article class='main__item'><a href='http://localhost:8000/actorPage.php?nombre=$id'>Role : $role</a></article>
-                               <article class='main__item'>Vrai nom : $name</article>
+                               <article class='main__item'><a href='http://localhost:8000/actorPage.php?nombre=$id'>Vrai nom : $name</a></article>
                            </div>");
    }
 
