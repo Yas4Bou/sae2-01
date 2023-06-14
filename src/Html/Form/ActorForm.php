@@ -50,4 +50,28 @@ class ActorForm
         return $html;
     }
 
+    public function setEntityFromQueryString(): void
+    {
+        $id = $_POST['id'] ?? null;
+        $name = $_POST['name'] ?? null;
+
+
+        if ($id !== null && is_numeric($id)) {
+            $id = (int)$id;
+        } else {
+            $id = null;
+        }
+
+
+        if ($name === null) {
+            throw new ParameterException("Le nom de l'acteur est requis.");
+        }
+
+
+        $name = $this->stripTagsAndTrim($name);
+
+
+        $this->actor = new actor($name, $id);
+    }
+
 }
