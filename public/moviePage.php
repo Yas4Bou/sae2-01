@@ -23,8 +23,10 @@ if(isset($_GET["nombre"])){
         $overview = $moviePage->escapeString($value->getOverview());
         $moviePage -> setTitle(" Film - $title");
         $releaseDate = $value->getReleaseDate();
+        $posterId = $value->getPosterId();
         $moviePage->appendContent("<nav> 
                                <div class='info'>
+                                 <img src= 'image.php?imageID=$posterId' width='100px' height='150px'>
                                  <article class='info__item'> $title </article>    
                                  <article class='info__item'> Date de sortie : $releaseDate </article> 
                                  <article class='info__item'> Titre d'origine : $originTitle </article>  
@@ -40,8 +42,10 @@ if(isset($_GET["nombre"])){
     foreach ($tableau2  as $key => $value) {
         $name = $moviePage->escapeString($value->getName());
         $role = $moviePage->escapeString($value->getRole());
+        $avatarId = $value ->getAvatarId();
         $id = $value->getId();
         $moviePage->appendContent("<div class='main'>
+                               <img src= 'image.php?imageID=$avatarId' width='100px' height='150px'>
                                <article class='main__item'><a href='http://localhost:8000/actorPage.php?nombre=$id'>Role : $role</a></article>
                                <article class='main__item'><a href='http://localhost:8000/actorPage.php?nombre=$id'>Vrai nom : $name</a></article>
                            </div>");
