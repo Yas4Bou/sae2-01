@@ -15,6 +15,8 @@ if(isset($_GET["nombre"])) {
     $value1 = actor::findAll($Id);
 
     $name = $actorPage->escapeString($value1->getName());
+    $menu = '<div id="menu"> <a href="http://localhost:8000/homePage.php">Menu</a> </div>';
+    $actorPage->appendContent($menu);
     $placeOfBirth = $actorPage->escapeString($value1->getPlaceOfBirth());
     $biography = $actorPage->escapeString($value1->getBiography());
     $birthday = $value1->getBirthday();
