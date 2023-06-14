@@ -187,21 +187,25 @@ class actor
         return $actor;
     }
 
+
+    
+
     public function insert(): actor
     {
         $requete = MyPDO::getInstance()->prepare(
             <<<'SQL'
-                INSERT INTO people (name, id)
-                VALUES (?, ?);
+                INSERT INTO people (name, biography, placeOfBirth, birthday, death, avatarId)
+                VALUES (?, ?, ?, ?, ?, ?);
                 SQL
         );
-        $requete->execute([$this->name, $this->id]);
-        $this->m MyPDO::getInstance()->lastInsertId();
+        $requete->execute([$this->name, $this->biography, $this->placeOfBirth, $this->birthday, $this->death, $this->avatarId]);
+
+        $this->id= intval(MyPDO::getInstance()->lastInsertId());
 
         $requete -> setFetchMode(MyPdo::FETCH_CLASS, actor::class);
         $tab = $requete ->fetch();
         if(!$tab){
-            throw new Excpetion\EntityNotFoundException("id : Cet acteur n'existe pas ");
+            throw new Excpetion\EntityNotFoundException("L'acteur avec l'ID {$this->id} n'existe pas.");
         }
 
         return $this;
@@ -217,16 +221,16 @@ class actor
         $requete = MyPDO::getInstance()->prepare(
             <<<'SQL'
                 UPDATE pepole
-                SET name = ?
+                SET name = ?, biography = ?, placeOfBirth = ?, birthday = ?, death = ?, avatarId =?
                 WHERE id = ? ;
                 SQL
         );
 
-        $requete->execute([$this->name, $this->id]);
+        $requete->execute([$this->name, $this->biography, $this->placeOfBirth, $this->birthday, $this->death, $this->avatarId, $this->id]);
         $requete -> setFetchMode(MyPdo::FETCH_CLASS, actor::class);
         $tab = $requete ->fetch();
         if(!$tab){
-            throw new Excpetion\EntityNotFoundException("id : Cet acteur n'existe pas ");
+            throw new Excpetion\EntityNotFoundException("Cet acteur n'existe pas pour l'ID : {$this->id}");
         }
 
         return $this;
