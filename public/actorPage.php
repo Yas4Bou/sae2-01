@@ -24,7 +24,7 @@ if(isset($_GET["nombre"])) {
     $avatarId = $value1 ->getAvatarId();
     $actorPage -> setTitle(" Films - $name");
     $actorPage->appendContent("<div class='menu'> 
-                                    <img src= 'image.php?imageID=$avatarId' width='100px' height='150px'>
+                                    <img src= 'imageActor.php?imageID=$avatarId' width='100px' height='150px'>
                                     <article class='menu__item'>$name  </article> 
                                     <article class='menu__item'>Lieu de naissance : $placeOfBirth </article>
      
@@ -46,7 +46,7 @@ if(isset($_GET["nombre"])) {
     $releaseDate = $value->getReleaseDate();
     $posterId = $value->getPosterId();
     $actorPage->appendContent("<div class='conteneur'> 
-                                    <img src= 'image.php?imageID=$posterId' width='100px' height='150px'>
+                                    <img src= 'imageMovie.php?imageID=$posterId' width='100px' height='150px'>
                                     <div class='film'>
                                         <div class='title'><a href='http://localhost:8000/moviePage.php?nombre=$id'> Titre du film : $title </a> </div>
                                         <div class='dateSortie'>Date de sortie : $releaseDate </div>

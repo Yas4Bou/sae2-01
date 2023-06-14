@@ -21,11 +21,11 @@ if(isset($_GET['imageID'])) {
     $Id = $_GET['imageID'];
     $image= new cover();
     $image = cover::findById($Id);
-    header("Content-Type : image/jpeg");
+    header("Content-Type : imageMovie/jpeg");
     echo $image->getJpeg();
 } elseif(isset($_GET['type'])) {
     $Id = $_GET['type'];
-    header("Content-Type : image/jpeg");
-    echo file_get_contents("Image\actor.png");
+    header("Content-Type : imageMovie/jpeg");
+    echo file_get_contents("Image\movie.png");
 
 }
