@@ -4,29 +4,25 @@ declare(strict_types=1);
 require_once '../vendor/autoload.php';
 
 use Css\AppWebPage;
-use Entity\movieCollectionRequete1;
-use Entity\movieCollectionRequete2;
+use Entity\movie; 
+use Entity\movie_cast;
 
 $moviePage = new AppWebPage();
 
 if(isset($_GET["nombre"])){
     $Id = $_GET['nombre'];
+    $moviePage->appendContent('<div class="menu"> <a href="http://localhost:8000/homePage.php">Menu</a> </div>');
+    $value1 = movie::findAll($Id);
 
-   $requetes1 = new movieCollectionRequete1();
-   $tableau1 = $requetes1 ->findAll($Id);
 
-
-   foreach ($tableau1  as $key => $value) {
-        $title = $moviePage->escapeString($value->getTitle());
-        $menu = '<div class="menu"> <a href="http://localhost:8000/homePage.php">Menu</a> </div>';
-        $moviePage->appendContent($menu);
-        $originTitle = $moviePage->escapeString($value->getOriginaltitle());
-        $tagline = $moviePage->escapeString($value->getTagline());
-        $overview = $moviePage->escapeString($value->getOverview());
-        $moviePage -> setTitle(" Film - $title");
-        $releaseDate = $value->getReleaseDate();
-        $posterId = $value->getPosterId();
-        $moviePage->appendContent("<nav> 
+    $title = $moviePage->escapeString($value1->getTitle());
+    $originTitle = $moviePage->escapeString($value1->getOriginaltitle());
+    $tagline = $moviePage->escapeString($value1->getTagline());
+    $overview = $moviePage->escapeString($value1->getOverview());
+    $moviePage -> setTitle(" Film - $title");
+    $releaseDate = $value1->getReleaseDate();
+    $posterId = $value1->getPosterId();
+    $moviePage->appendContent("<nav> 
                                <div class='info'>
                                  <img src= 'image.php?imageID=$posterId' width='100px' height='150px'>
                                  <article class='info__item'> $title </article>    
@@ -36,25 +32,28 @@ if(isset($_GET["nombre"])){
                                  <article class='info__item'> Résumer :  $overview </article> 
                                     </div>
                                    </nav>");
-   }
-   $requetes2 = new movieCollectionRequete2();
-   $tableau2 = $requetes2->findAll($Id);
 
 
-    foreach ($tableau2  as $key => $value) {
-        $name = $moviePage->escapeString($value->getName());
-        $role = $moviePage->escapeString($value->getRole());
-        $avatarId = $value ->getAvatarId();
-        $id = $value->getId();
+    $tableau2 = movie_cast::findAll($Id);
+
+
+    foreach ($tableau2  as $key => $value2) {
+        $name = $moviePage->escapeString($value2->getName());
+        $role = $moviePage->escapeString($value2->getRole());
+        $avatarId = $value2 ->getAvatarId();
+        $id = $value2->getId();
         $moviePage->appendContent("<div class='main'>
                                <img src= 'image.php?imageID=$avatarId' width='100px' height='150px'>
                                <article class='main__item'><a href='http://localhost:8000/actorPage.php?nombre=$id'>Role : $role</a></article>
                                <article class='main__item'><a href='http://localhost:8000/actorPage.php?nombre=$id'>Vrai nom : $name</a></article>
                            </div>");
-   }
+    }
 
 
-   $date = $moviePage ->getLastModification();
+
+
+
+    $date = $moviePage ->getLastModification();
    $moviePage ->appendContent("<footer>$date</footer>");
 
 }

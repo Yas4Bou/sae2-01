@@ -1,13 +1,11 @@
 <?php
-
 declare(strict_types=1);
 
 namespace Entity;
 
 use Database\MyPdo;
 use Entity\Excpetion;
-
-class movie
+class home
 {
     private int $posterId;
     private string $originalLanguage;
@@ -20,16 +18,16 @@ class movie
     private string $originalTitle;
 
     /**
-    * @return int
-    */
+     * @return int
+     */
     public function getPosterId(): int
     {
         return $this->posterId;
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getOriginalLanguage(): string
     {
         return $this->originalLanguage;
@@ -44,85 +42,71 @@ class movie
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getOverview(): string
     {
         return $this->overview;
     }
 
     /**
-    *  @return string
-    */
+     *  @return string
+     */
     public function getReleaseDate(): string
     {
         return $this->releaseDate;
     }
 
     /**
-    * @return int
-    */
+     * @return int
+     */
     public function getRuntime(): int
     {
         return $this->runtime;
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getTagline(): string
     {
         return $this->tagline;
     }
 
     /**
-    * @return string
-    */
+     * @return string
+     */
     public function getTitle(): string
     {
         return $this->title;
     }
 
     /**
-    * @return int
-    */
+     * @return int
+     */
     public function getId(): int
     {
         return $this->id;
     }
 
-
     /**
-     * Cette methode retourne un tableau qui contient toutes les information d'un films de la base de données
+     * Cette methode retourne un tableau qui contient toutes les informations des films de la base de données, dans l'ordre alphabetique
      * @return \Entity\movie[]
      */
-    public static function findAll( string $Id) : movie
+    public static function findAll() : array
     {
         $requete =  MyPDO::getInstance()->prepare(
             <<<'SQL'
             SELECT posterId , originalLanguage, originalTitle, overview, releaseDate, runtime, tagline, title, id
             FROM movie
-            WHERE id = ? ;
+            ORDER BY title; 
         SQL);
 
 
-        $requete -> execute([$Id]);
+        $requete -> execute();
         $requete -> setFetchMode(MyPdo::FETCH_CLASS, \Entity\movie::class);
-        $tab = $requete ->fetch();
+        return $requete->fetchAll();
 
-        if(!$tab){
-            throw new Excpetion\EntityNotFoundException("id : {$Id} Ce film n'existe pas ");
-        }
-        else {
-            return $tab;
-        }
     }
-
-
-
-
-
-
-
 
 }
