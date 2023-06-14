@@ -108,10 +108,15 @@ private function __construct(?int $id, string $name, string|null $death, int|nul
     if (isset($id)){
         $this->id= $id;
     }
-    if(isset(
-    $this->death= $death;
-    $this->avatarId= $avatarId;
-    $this->birthday= $birthday;
+    if(isset($death)){
+        $this->death= $death;
+    }
+    if(isset($avatarId)){
+        $this->avatarId= $avatarId;
+    }
+    if(isset($birthday)){
+        $this->birthday= $birthday;
+    }
     $this->biography= $biography;
     $this->placeOfBirth= $placeOfBirth;
 }
