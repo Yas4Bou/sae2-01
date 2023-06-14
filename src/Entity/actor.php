@@ -54,6 +54,12 @@ class actor
         return $this;
     }
 
+    
+
+    /**
+     * cette méthode retourne l'instance courante pour permettre le chaînage des méthodes
+     * @return $this
+     */
     public function delete(): self
     {
         if ($this->id !== null) {
