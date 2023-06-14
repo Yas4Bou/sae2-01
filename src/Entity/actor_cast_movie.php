@@ -11,6 +11,10 @@ class actor_cast_movie
     private string $role;
     private string $releaseDate;
 
+    private int $posterId;
+
+    private int|null $avatarId;
+
     /**
     * @return int
     */
@@ -40,6 +44,14 @@ class actor_cast_movie
     public function getReleaseDate(): string
     {
         return $this->releaseDate;
+    }
+
+    /**
+    * @return int
+    */
+    public function getPosterId(): int
+    {
+        return $this->posterId;
     }
 
 }
