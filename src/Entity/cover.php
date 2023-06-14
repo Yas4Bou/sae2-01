@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Entity;
 
-use Database\MyPdo;
 
-class affiche
+
+class cover
 {
     private int $id ;
     private string $jpeg;
