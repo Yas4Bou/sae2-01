@@ -4,13 +4,14 @@ declare(strict_types=1);
 require_once '../vendor/autoload.php';
 
 use Css\AppWebPage;
-use Entity\homeCollection;
+use Entity\home;
 
 $homePage = new AppWebPage('Film');
-$requete = new homeCollection();
-$tableau = $requete ->findAll();
+
+$tableau = home::findAll(); 
 
 $homePage->appendContent("<div class='movie'>");
+
 
 foreach ($tableau  as $key => $value) {
     $l = $homePage->escapeString($value ->getTitle());
@@ -18,6 +19,7 @@ foreach ($tableau  as $key => $value) {
     $posterId = $value->getPosterId();
     $homePage->appendContent("<div class='movie-items'><a href='http://localhost:8000/moviePage.php?nombre=$id'><img src= 'image.php?imageID=$posterId' width='100px' height='150px'> <br>$l</a></div>");
 }
+
 
 $homePage->appendContent("</div>");
 $date = $homePage ->getLastModification();
